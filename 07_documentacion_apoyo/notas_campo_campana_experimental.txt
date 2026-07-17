@@ -63,7 +63,7 @@ Data rate observado: SF9BW125 al inicio, posteriormente SF8BW125 y SF7BW125 por 
 Data rate dominante en dataset final: SF7BW125
 Intervalo uplink: 30 s
 Gateway propio: loragateway-tfgalvaro / 0016C001F1618810
-Archivo JSON asociado: 03_datos_ttn_json/ttn_R01_H01_raw_20260706.json
+Archivo JSON asociado: 02_datos_ttn_json/ttn_R01_H01_raw_20260706.json
 Archivo CSV limpio: 03_csv_gateway_propio/R01_H01_solo_gateway_propio.csv
 Observaciones:
 - Captura valida recibida por el gateway propio.
