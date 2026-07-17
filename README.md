@@ -9,7 +9,7 @@ Titulación: **Grado en Ingeniería en Tecnologías de la Telecomunicación**
 Mención: **Telemática**  
 Universidad: **Universidad de Las Palmas de Gran Canaria**
 
--------------------------X----------------------------X-----------------------------X-------------------------------X------------------------------X------------------------------X-------------------------------X---------
+
 
 ## Descripción
 
@@ -19,7 +19,7 @@ El proyecto se centra en el análisis, diseño, implementación y validación de
 
 La arquitectura implementada está formada por un nodo LoRaWAN basado en una placa **Heltec ESP32-S3 con transceptor SX1262**, un gateway LoRaWAN propio basado en **Raspberry Pi 5** y un concentrador **SX1302/SX1303**, junto con la integración con **The Things Network** como servidor de red.
 
--------------------------X----------------------------X-----------------------------X-------------------------------X------------------------------X------------------------------X-------------------------------X---------
+
 
 ## Contenido del repositorio
 
@@ -47,7 +47,7 @@ Scripts y resultados de la validación preliminar mediante clasificación k-NN.
 07_documentacion_apoyo/
 Figuras, esquemas o documentación complementaria del sistema implementado.
 
--------------------------X----------------------------X-----------------------------X-------------------------------X------------------------------X------------------------------X-------------------------------X---------
+
 
 ## Campaña experimental
 
@@ -64,7 +64,7 @@ Durante las pruebas se transmitieron tramas LoRaWAN desde el nodo Heltec y se re
 
 Posteriormente, los datos exportados desde The Things Network fueron convertidos a formato CSV, filtrados para conservar únicamente las recepciones asociadas al gateway propio y procesados para construir el dataset final empleado en el análisis.
 
--------------------------X----------------------------X-----------------------------X-------------------------------X------------------------------X------------------------------X-------------------------------X---------
+
 
 ## Validación mediante k-NN
 
@@ -81,7 +81,7 @@ Los resultados generados incluyen:
 - Resultados de validación usando RSSI/SNR.
 - Resultados de validación usando RSSI/SNR/SF.
 
--------------------------X----------------------------X-----------------------------X-------------------------------X------------------------------X------------------------------X-------------------------------X---------
+
 
 ## Tecnologías y herramientas utilizadas
 
@@ -95,7 +95,7 @@ Los resultados generados incluyen:
 - Arduino IDE.
 - k-NN para clasificación preliminar de huellas radioeléctricas.
 
--------------------------X----------------------------X-----------------------------X-------------------------------X------------------------------X------------------------------X-------------------------------X---------
+
 
 ## Aviso sobre credenciales
 
@@ -103,7 +103,7 @@ Por motivos de seguridad, no se incluyen claves reales, tokens, contraseñas ni 
 
 Los campos correspondientes a credenciales LoRaWAN, como `DEV_EUI`, `JOIN_EUI` o `APP_KEY`, deberán ser sustituidos por los valores propios de cada despliegue en The Things Network.
 
--------------------------X----------------------------X-----------------------------X-------------------------------X------------------------------X------------------------------X-------------------------------X---------
+
 
 ## Uso académico
 
