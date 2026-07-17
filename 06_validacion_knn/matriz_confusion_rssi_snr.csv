@@ -1,0 +1,40 @@
+VALIDACIÓN PRELIMINAR MEDIANTE k-NN
+=============================================
+Dataset: dataset_lorawan_R01_H01_H02_H03_gateway_propio.csv
+Número de muestras: 39
+Python: 3.13.5
+pandas: 3.0.3
+scikit-learn: 1.9.0
+Clasificador: k-NN
+Número de vecinos: k = 1
+Métrica: distancia euclídea
+Pesos: uniformes
+Validación: leave-one-out
+Normalización o estandarización: no aplicada
+Tratamiento del SF: variable numérica
+
+Modelo: rssi_snr
+Variables: rssi, snr
+Exactitud global: 69.2 %
+Matriz de confusión:
+          Predicha_H01  Predicha_H02  Predicha_H03
+Real_H01            15             0             0
+Real_H02             1             9             3
+Real_H03             0             8             3
+Acierto por posición:
+  H01: 100.0 %
+  H02: 69.2 %
+  H03: 27.3 %
+
+Modelo: rssi_snr_sf
+Variables: rssi, snr, spreading_factor
+Exactitud global: 97.4 %
+Matriz de confusión:
+          Predicha_H01  Predicha_H02  Predicha_H03
+Real_H01            15             0             0
+Real_H02             1            12             0
+Real_H03             0             0            11
+Acierto por posición:
+  H01: 100.0 %
+  H02: 92.3 %
+  H03: 100.0 %
