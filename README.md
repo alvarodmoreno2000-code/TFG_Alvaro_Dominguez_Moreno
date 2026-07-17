@@ -46,8 +46,9 @@ Scripts y resultados de la validación preliminar mediante clasificación k-NN.
 
 07_documentacion_apoyo/
 Figuras, esquemas o documentación complementaria del sistema implementado.
+```
 
-
+---
 
 ## Campaña experimental
 
