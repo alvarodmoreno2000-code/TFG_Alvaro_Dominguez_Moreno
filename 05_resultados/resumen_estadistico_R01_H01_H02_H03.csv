@@ -1,0 +1,4 @@
+posicion,muestras_gateway_propio,dev_addr,f_cnt_min,f_cnt_max,rssi_medio_dbm,rssi_min_dbm,rssi_max_dbm,snr_medio_db,snr_min_db,snr_max_db,sf_dominante
+H01,15,"260B6210,260B6296",1,11,-107.27,-113.0,-104.0,9.85,7.0,12.0,7
+H02,13,260BBAF6,7,19,-118.46,-121.0,-113.0,-1.93,-8.0,5.0,7
+H03,11,260BB75A,1,12,-120.36,-122.0,-119.0,-5.21,-9.5,-2.8,9
