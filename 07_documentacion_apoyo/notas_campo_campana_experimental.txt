@@ -1,0 +1,147 @@
+NOTAS CAMPO DIA 2
+
+Fecha: 06/07/2026
+Ubicacion: campana exterior LoRaWAN con gateway fijo R01 y nodo Heltec desplazado por posiciones H01, H02, H03 y opcionalmente H04/H05
+Condiciones: prueba de campo con Raspberry Pi funcionando como gateway LoRaWAN conectado a TTN mediante hotspot movil
+Hotspot movil: activo. Raspberry conectada por wlan0. IP observada: 172.20.10.2
+Raspberry/gateway: Raspberry Pi con concentrador SX1302/SX1303
+Heltec: Heltec ESP32 V4 / ESP32-S3 + SX1262
+Sketch: firmware LoRaWAN OTAA mediante RadioLib. Payload: LORAWAN1,H01,seq,t_ms
+ADR: activado
+Intervalo uplink: 30 s
+Servidor LoRaWAN: The Things Network, eu1.cloud.thethings.network
+Puerto Semtech UDP: 1700
+Gateway ID TTN: loragateway-tfgalvaro
+Gateway EUI: 0016C001F1618810
+
+Observaciones generales:
+- La Raspberry Pi queda fija en R01 durante toda la campana.
+- El Heltec se desplaza secuencialmente por las posiciones H01, H02, H03 y opcionalmente H04/H05.
+- El Heltec no necesita conexion a Internet, solo alimentacion y antena LoRa conectada correctamente.
+- La Raspberry si necesita Internet para reenviar las tramas al servidor TTN.
+- El nodo Heltec se une a TTN mediante OTAA.
+- Una vez unido, no se debe pulsar RST, desconectar alimentacion ni cambiar el cable USB/powerbank.
+- El join OTAA se realiza cerca del gateway para asegurar la recepcion del Join Accept.
+- La captura valida de cada posicion comienza cuando el Heltec ya esta unido y se encuentra fisicamente en la posicion correspondiente.
+- El payload transmitido incluye una etiqueta de posición asociada a cada punto de campaña, junto con un número de secuencia y una marca temporal relativa. La posición real de cada muestra se verifica posteriormente mediante el archivo JSON exportado desde TTN y el punto de campaña correspondiente.
+- Para el dataset se utilizaran los metadatos de TTN/gateway: RSSI, SNR, data rate, frecuencia, gateway ID/EUI y contador de trama.
+- Se considera muestra valida aquella recibida por el gateway propio loragateway-tfgalvaro.
+- No se consideran muestras validas los Join Request ni Join Accept.
+- Los paquetes con DevAddr 00000000 corresponden a intentos de union OTAA y no deben usarse como muestras de campana.
+- Las muestras validas aparecen como uplinks de aplicacion con DevAddr asignado y FCnt creciente.
+- Durante la prueba se observo ajuste dinamico del data rate por ADR, pasando de SF9BW125 a SF8BW125 y posteriormente a SF7BW125.
+- La exportacion de datos se realiza desde TTN Live data del end device heltec01 mediante Export as JSON.
+- Cada posicion debe guardarse con un nombre de archivo independiente para evitar mezclar puntos.
+
+R01 - Raspberry/gateway:
+Coordenadas x,y: punto fijo de referencia R01 o G01 (en la memoria)  Coordenadas omitidas por privacidad.
+Descripcion: Raspberry Pi con HAT SX1302/SX1303 actuando como gateway LoRaWAN propio
+Ubicacion fisica: posicion fija de la campana
+Conexion: hotspot movil por wlan0
+IP observada: 172.20.10.2
+Gateway ID TTN: loragateway-tfgalvaro
+Gateway EUI: 0016C001F1618810
+Servidor: eu1.cloud.thethings.network
+Puerto: 1700
+Configuracion: lorawan_public true, EU868, Semtech UDP Packet Forwarder
+Observaciones: gateway activo en TTN y recibiendo uplinks del Heltec. Se verifican eventos Receive uplink message en la consola del gateway.
+
+H01:
+Coordenadas x,y: posicion 1 de campaña Coordenadas omitidas por privacidad.
+Hora inicio: 20:33:22 aprox.
+Hora fin: 20:39:21 aprox.
+Uplinks validos: 10
+DevAddr observado: 26 0B 62 10
+FCnt inicial considerado: 1 aprox.
+FCnt final considerado: 10 aprox.
+RSSI observado: aprox. entre -113 y -104 dBm
+RSSI final en dataset: entre -113 y -98 dBm
+RSSI medio final: -104.00 dBm
+SNR observado: aprox. entre 7 y 12 dB
+SNR medio final: 10.12 dB
+Data rate observado: SF9BW125 al inicio, posteriormente SF8BW125 y SF7BW125 por ADR
+Data rate dominante en dataset final: SF7BW125
+Intervalo uplink: 30 s
+Gateway propio: loragateway-tfgalvaro / 0016C001F1618810
+Archivo JSON asociado: 03_datos_ttn_json/ttn_R01_H01_raw_20260706.json
+Archivo CSV limpio: 03_csv_gateway_propio/R01_H01_solo_gateway_propio.csv
+Observaciones:
+- Captura valida recibida por el gateway propio.
+- Antes de la captura se realizaron pruebas de union OTAA cerca del gateway para asegurar el Join Accept.
+- Durante la captura H01 se mantuvo el Heltec encendido, sin pulsar RST y sin cambiar alimentacion.
+- Se observaron uplinks consecutivos en TTN con RSSI y SNR estables.
+- H01 presenta el mejor comportamiento radioelectrico de los tres puntos medidos.
+- La serie H01 se considera valida para el dataset experimental LoRaWAN basado en RSSI/SNR.
+
+H02:
+Coordenadas x,y: posicion 2 de campaña Coordenadas omitidas por privacidad.
+Hora inicio: 21:06:02
+Hora fin: 21:13:16
+Uplinks validos:13 en dataset final, recibidos por gateway propio
+DevAddr observado: 26 0B BA F6
+FCnt inicial considerado: 7
+FCnt final considerado: 19
+RSSI medio: -118.46 dBm
+RSSI observado: entre -121 y -113 dBm
+SNR medio: -1.93 dB
+SNR observado: aprox. entre -8 y 5 dB
+Data rate observado: SF7BW125
+Intervalo uplink: 30 s
+Gateway propio: loragateway-tfgalvaro / 0016C001F1618810
+Archivo JSON asociado: 03_datos_ttn_json/ttn_R01_H02_raw_20260706.json
+Archivo CSV limpio: 03_csv_gateway_propio/R01_H02_solo_gateway_propio.csv
+Observaciones:
+- Captura valida recibida por el gateway propio.
+- H02 presenta peor enlace que H01, con RSSI mas bajo y SNR claramente mas variable.
+- Payload actualizado a LORAWAN1,H02,seq,t_ms.
+- El Heltec fue desplazado a H02 y se mantuvo encendido durante la captura.
+- No se pulso RST durante la serie H02.
+- Los mensajes "No se recibio ningun downlink" son normales y no afectan a los uplinks de campana.
+- Se observan algunas tramas con SNR negativo, lo que indica peor calidad de enlace respecto a H01.
+- La serie H02 se considera valida para el dataset experimental LoRaWAN basado en RSSI/SNR.
+
+H03:
+Coordenadas x,y:  posicion 3 de campaña Coordenadas omitidas por privacidad.
+Hora inicio: 20:18:24 aprox.
+Hora fin: 20:30:10 aprox.
+Uplinks validos: 11 en dataset final
+DevAddr observado: 26 0B B7 5A
+FCnt inicial considerado: 1
+FCnt final considerado: 12
+RSSI medio: -120.36 dBm
+RSSI observado: entre -122 y -119 dBm
+SNR medio: -5.21 dB
+SNR observado: entre -9.5 y -2.8 dB
+Data rate dominante: SF9BW125
+Intervalo uplink: 30 s
+Gateway propio: loragateway-tfgalvaro / 0016C001F1618810
+Archivo JSON asociado: 03_datos_ttn_json/ttn_R01_H03_raw_20260707.json
+Archivo CSV limpio: 03_csv_gateway_propio/R01_H03_solo_gateway_propio.csv
+Observaciones:
+- Captura valida recibida por el gateway propio.
+- H03 presenta el enlace mas debil de los tres puntos medidos.
+- Se observan valores de RSSI bajos y SNR negativo.
+- El uso predominante de SF9 indica una condicion de enlace mas exigente que en H01 y H02.
+- Durante la captura tambien se observaron recepciones por gateways externos, pero el dataset principal se ha filtrado para conservar solo las muestras recibidas por loragateway-tfgalvaro / 0016C001F1618810.
+
+
+Incidencias y decisiones durante la campana:
+- En los primeros intentos desde una posicion mas alejada, el Heltec envio Join Request pero no recibio correctamente el Join Accept.
+- Al acercar el Heltec al gateway, se completo correctamente el proceso OTAA.
+- Se detecto que pulsar RST reinicia el Heltec y obliga a repetir OTAA, por lo que durante la campana no debe reiniciarse el nodo.
+- Para evitar esperas largas, se redujo el intervalo entre uplinks de 60 s a 30 s.
+- Tras modificar el intervalo, se verifico en el Serial Monitor el mensaje: Proximo uplink en 30 segundos.
+- El error puntual de envio de uplink observado tras una reprogramacion no se mantuvo tras reiniciar y volver a unir correctamente el nodo.
+- La campana definitiva se realiza con el Heltec ya unido a TTN y desplazandolo encendido entre posiciones.
+- La posición real de cada muestra se asignará por el archivo JSON y por el punto de campaña correspondiente.
+
+Archivos previstos:
+- H01: 03_datos_ttn_json/ttn_R01_H01_raw_20260706.json
+- H02: 03_datos_ttn_json/ttn_R01_H02_raw_20260706.json
+- H03: 03_datos_ttn_json/ttn_R01_H03_raw_20260707.json
+
+Procesado posterior:
+- Convertir los archivos JSON exportados desde TTN a CSV mediante 04_scripts_procesado/ttn_json_to_csv_lorawan.py.
+- Filtrar las muestras recibidas por el gateway propio y guardar los CSV limpios en 03_csv_gateway_propio.
+- Generar el dataset final, el resumen estadístico y las gráficas de resultados en 05_resultados.
+- Realizar la validación preliminar mediante k-NN con los archivos incluidos en 06_validacion_knn.
